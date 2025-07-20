@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+
+
+html {
+    /* Menambahkan efek scroll yang mulus */
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Gaya body yang sudah ada dari langkah sebelumnya */
+    background-color: #f9fafb;
+    background-image: linear-gradient(to bottom right, #ffffff, #f3f4f6);
+    background-attachment: fixed;
+    min-height: 100vh;
+}
