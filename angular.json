@@ -88,5 +88,9 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false,
+    "nodeVersion": "20.18.1"
   }
 }
