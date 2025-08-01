@@ -1,76 +1,122 @@
-<section id="projects" class="py-16 md:py-24 bg-white">
-  <div class="text-center mb-16">
-    <h2 class="text-4xl md:text-5xl font-black text-black mb-4 tracking-tight">
-      Proyek <span class="text-transparent" style="-webkit-text-stroke: 2px #000;">⚒️</span>
-    </h2>
-    <div class="w-24 h-px bg-black mx-auto"></div>
-  </div>
-  <div class="container mx-auto px-4 sm:px-6 max-w-6xl">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<section id="projects" class="py-16 bg-gray-50">
+  <div class="h-12"></div>
+  <div class="container mx-auto px-4">
 
+    <!-- Filter -->
+    <div class="mb-8 p-4 bg-white rounded-lg shadow-sm">
+      <p class="text-sm text-gray-600 mb-3 text-left">
+        Jelajahi proyek-proyek saya berdasarkan domain industri
+      </p>
+      <div class="flex flex-wrap justify-start gap-2">
+        <button *ngFor="let domain of availableDomains" (click)="toggleDomain(domain)"
+          [class.bg-black]="selectedDomains.includes(domain)" [class.text-white]="selectedDomains.includes(domain)"
+          [class.bg-white]="!selectedDomains.includes(domain)"
+          class="px-4 py-1.5 rounded-lg border border-gray-300 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-black">
+          {{ domain }}
+        </button>
+      </div>
+    </div>
+
+
+    <!-- Grid Projects -->
+    <div *ngIf="projects$ | async as projects" class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div *ngFor="let project of projects"
-        class="group bg-white border border-gray-200 hover:border-black transition-all duration-300 overflow-hidden flex flex-col">
+        class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 flex flex-col">
 
-        <div class="relative w-full h-48 bg-gray-100 overflow-hidden">
-          <img [src]="project.images[project.currentIndex]" [alt]="'Gambar ' + project.title"
-            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <!-- Image Slider -->
+        <div class="relative aspect-video overflow-hidden touch-none" (pointerdown)="onDragStart($event, project)"
+          (pointermove)="onDragMove($event, project)" (pointerup)="onDragEnd($event, project)"
+          (pointerleave)="onDragEnd($event, project)" (mouseenter)="pauseAutoSlide()" (mouseleave)="resumeAutoSlide()"
+          tabindex="0" [attr.aria-label]="'Image carousel for ' + project.title">
+          <div class="flex h-full transition-transform duration-500 ease-out"
+            [style.transform]="'translateX(-' + (project.currentIndex * 100) + '%)'"
+            [style.cursor]="isDragging(project) ? 'grabbing' : 'grab'">
+            <div *ngFor="let image of project.images; let i = index" class="min-w-full h-full flex-shrink-0">
+              <img [src]="image" [alt]="project.title + ' image ' + (i + 1)" class="w-full h-full object-cover"
+                loading="lazy" draggable="false">
+            </div>
+          </div>
 
-          <ng-container *ngIf="project.images.length > 1">
-            <button (click)="prevImage(project)"
-              class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white border border-gray-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100">
-              <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          <!-- Navigation Arrows -->
+          <div *ngIf="project.images.length > 1" class="absolute inset-0 flex items-center justify-between px-2">
+            <button (click)="prevImage(project, $event)" aria-label="Previous image"
+              class="p-3 rounded-full bg-white shadow hover:bg-gray-100 transition-colors focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                  clip-rule="evenodd" />
               </svg>
             </button>
-            <button (click)="nextImage(project)"
-              class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/90 hover:bg-white border border-gray-300 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 focus:opacity-100">
-              <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            <button (click)="nextImage(project, $event)" aria-label="Next image"
+              class="p-3 rounded-full bg-white shadow hover:bg-gray-100 transition-colors focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                  clip-rule="evenodd" />
               </svg>
             </button>
-          </ng-container>
+          </div>
 
-          <div *ngIf="project.images.length > 1" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-            <span *ngFor="let image of project.images; let i = index"
-              [ngClass]="i === project.currentIndex ? 'bg-white' : 'bg-white/50'"
-              class="block h-1.5 w-1.5 rounded-full cursor-pointer">
-            </span>
+          <!-- Domain Badge -->
+          <span
+            class="absolute bottom-4 left-4 bg-white text-gray-800 text-xs font-medium px-3 py-1 rounded-full shadow-sm">
+            {{ project.domain }}
+          </span>
+
+          <!-- Slide Indicators -->
+          <div *ngIf="project.images.length > 1" class="absolute bottom-4 right-4 flex gap-1.5">
+            <button *ngFor="let img of project.images; let i = index" (click)="goToSlide(project, i, $event)"
+              [attr.aria-label]="'Slide ' + (i + 1)"
+              class="w-2 h-2 rounded-full transition-all duration-300 focus:outline-none"
+              [class.bg-blue-600]="project.currentIndex === i" [class.bg-gray-300]="project.currentIndex !== i">
+            </button>
           </div>
         </div>
 
-        <div class="p-6 flex flex-col flex-grow">
-          <h3 class="text-xl font-bold text-black mb-3 tracking-tight">{{ project.title }}</h3>
-          <p class="text-gray-600 mb-6 flex-grow leading-relaxed font-light">{{ project.description }}</p>
+        <!-- Info -->
+        <div class="p-6 flex-1 flex flex-col">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold text-gray-900">{{ project.title }}</h3>
+            <span *ngIf="project.year" class="text-sm text-gray-500">{{ project.year }}</span>
+          </div>
+          <p class="text-gray-600 mb-3 flex-1">{{ project.description }}</p>
 
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-2 mb-4">
             <span *ngFor="let tag of project.tags"
-              class="border border-gray-300 text-gray-700 text-xs font-medium px-3 py-1 tracking-wide uppercase">
+              class="text-xs font-medium bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full whitespace-nowrap">
               {{ tag }}
             </span>
           </div>
 
-          <div class="mt-auto flex flex-col sm:flex-row gap-3">
-            <a *ngIf="project.livePreviewUrl" [href]="project.livePreviewUrl" target="_blank" rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center gap-2 text-center py-3 px-4 bg-black text-white text-xs font-medium tracking-widest uppercase border border-black hover:bg-white hover:text-black transition-colors duration-300">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-              LIVE
+          <div class="flex gap-3 mt-auto">
+            <a *ngIf="project.livePreviewUrl" [href]="project.livePreviewUrl" target="_blank" class="flex-1 text-center px-4 py-2 text-sm font-medium 
+          bg-black text-white rounded-lg 
+          hover:bg-gray-900 transition-colors 
+          focus:outline-none">
+              Live Demo
             </a>
 
-            <a *ngIf="project.sourceCodeUrl" [href]="project.sourceCodeUrl" target="_blank" rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center gap-2 text-center py-3 px-4 border border-gray-300 text-gray-700 text-xs font-medium tracking-widest uppercase hover:border-black hover:text-black transition-colors duration-300">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
-                <path
-                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
-              </svg>
-              CODE
+            <a *ngIf="project.caseStudyUrl" [href]="project.caseStudyUrl" target="_blank"
+              class="flex-1 text-center px-4 py-2 text-sm font-medium border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors focus:outline-none">
+              Case Study
             </a>
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- Empty State -->
+    <div *ngIf="(projects$ | async)?.length === 0" class="text-center py-16">
+      <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h3 class="mt-2 text-lg font-medium text-gray-900">No projects found</h3>
+      <p class="mt-1 text-gray-500">Try adjusting your domain filters</p>
+      <button (click)="selectedDomains = []; filterProjects()"
+        class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus:outline-none">
+        Reset Filters
+      </button>
     </div>
   </div>
 </section>
