@@ -10,7 +10,7 @@ export interface Project {
   description: string;
   images: string[];
   type: 'Aplikasi Web' | 'Desain UI/UX' | 'Aplikasi Mobile';
-  domain: 'FnB' | 'Travel' | 'E-commerce' | 'Fintech' | 'Pendidikan' | 'Kesehatan';
+  domain: 'FnB' | 'Media & Pemberitaan' | 'Travel' | 'E-commerce' | 'Fintech' | 'Pendidikan' | 'Kesehatan';
   tags: string[];
   livePreviewUrl?: string;
   caseStudyUrl?: string;
@@ -28,7 +28,7 @@ export interface Project {
 export class Projects implements OnInit, OnDestroy { // Nama class harus PascalCase
   private autoSlideInterval: any;
 
-  public availableDomains: string[] = ['FnB', 'Travel', 'E-commerce', 'Fintech', 'Pendidikan', 'Kesehatan'];
+  public availableDomains: string[] = ['FnB','Media & Pemberitaan', 'Travel', 'E-commerce', 'Fintech', 'Pendidikan', 'Kesehatan'];
   public selectedDomains: string[] = [];
 
   private projectsSubject = new BehaviorSubject<Project[]>([]);
