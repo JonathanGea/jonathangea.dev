@@ -1,39 +1,33 @@
-# Stage 1: Build aplikasi Angular
-FROM node:20.19.0 AS build
+# ---------- Stage 1: Angular build ----------
+# Use a version that satisfies Angular CLI (20.19+ or 22.12+)
+FROM node:22.12.0 AS build
 
 WORKDIR /app
 
-# Copy package.json dan package-lock.json
+# Ensure deterministic, fast installs
 COPY package*.json ./
+RUN npm ci
 
-# Install dependencies
-RUN npm install
-
-# Copy seluruh kode sumber
+# Copy the rest and build with your project script
 COPY . .
+# (Your script already passes --configuration production)
+RUN node -v && npm -v && npx -y @angular/cli@latest ng version || true
+RUN npm run build -- --configuration=production
 
-# Build aplikasi Angular untuk production
-RUN npm run build -- --configuration production
-
-# Stage 2: Serve aplikasi dengan Node.js
-FROM node:20.19.0-alpine
+# ---------- Stage 2: Lightweight Node server ----------
+FROM node:22.12.0-alpine
 
 WORKDIR /app
 
-# Buat package.json untuk server
+# Minimal server deps
 RUN echo '{"name":"angular-server","version":"1.0.0","dependencies":{"express":"^4.18.2","compression":"^1.7.4"}}' > package.json
+RUN npm ci --omit=dev
 
-# Install dependencies untuk server
-RUN npm install
-
-# Copy build output dari stage sebelumnya dengan path yang benar untuk Angular 17+
+# Angular 17+ default output path
 COPY --from=build /app/dist/fe-public/browser /app/public
 
-# Copy server.js
+# Your server
 COPY server.js /app/server.js
 
-# Expose port yang akan digunakan
 EXPOSE 8080
-
-# Command untuk menjalankan server
 CMD ["node", "server.js"]
