@@ -51,11 +51,7 @@ export class ProjectsService {
                 id: 'a', // Added unique identifier
                 title: "e commerce",
                 description: "Platform e-commerce" 
-                images: [
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                ],
+                images: [],
                 tags: ['Angular', 'Tailwind CSS', 'Primeng'],
                 "livePreviewUrl": "template-fe-demo.up.railway.app",
                 sourceCodeUrl: '#',
@@ -70,13 +66,9 @@ export class ProjectsService {
                 id: 'afsd', // Added unique identifier
                 title: "dashboar",
                 description: "Platform e-commerce" 
-                images: [
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
-                ],
+                images: [],
                 tags: ['Angular', 'Tailwind CSS', 'Primeng'],
-                "livePreviewUrl": "template-fe-demo.up.railway.app/admin",
+                livePreviewUrl: "template-fe-demo.up.railway.app/admin",
                 sourceCodeUrl: '#',
                 caseStudyUrl: '#', // Added for consistency
                 type: 'Aplikasi Web',
