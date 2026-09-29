@@ -48,20 +48,39 @@ export class ProjectsService {
                 "currentIndex": 0
             },
             {
-                id: '1', // Added unique identifier
-                title: "Katalog Makanan Online (Order via WhatsApp)",
-                description: "Platform pemesanan makanan dengan desain responsif yang terintegrasi langsung ke WhatsApp untuk proses order yang lebih efisien.",
+                id: 'a', // Added unique identifier
+                title: "e commerce",
+                description: "Platform e-commerce" 
                 images: [
                     "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
                     "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
                     "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
                 ],
-                tags: ['Angular', 'Tailwind CSS', 'WhatsApp API'],
-                "livePreviewUrl": "https://perfume-ecommerce-web-fe-public-production.up.railway.app/h",
+                tags: ['Angular', 'Tailwind CSS', 'Primeng'],
+                "livePreviewUrl": "template-fe-demo.up.railway.app",
                 sourceCodeUrl: '#',
                 caseStudyUrl: '#', // Added for consistency
                 type: 'Aplikasi Web',
-                domain: 'FnB',
+                domain: 'e0commerce',
+                featured: true,
+                year: 2023, // Added year
+                currentIndex: 0 // Added for slider
+            },
+            {
+                id: 'afsd', // Added unique identifier
+                title: "dashboar",
+                description: "Platform e-commerce" 
+                images: [
+                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
+                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
+                    "https://imageeweb.s3.us-east-1.amazonaws.com/jonathangea.dev/food%3Dorder-app.webp",
+                ],
+                tags: ['Angular', 'Tailwind CSS', 'Primeng'],
+                "livePreviewUrl": "template-fe-demo.up.railway.app/admin",
+                sourceCodeUrl: '#',
+                caseStudyUrl: '#', // Added for consistency
+                type: 'Aplikasi Web',
+                domain: 'e-commerce',
                 featured: true,
                 year: 2023, // Added year
                 currentIndex: 0 // Added for slider
