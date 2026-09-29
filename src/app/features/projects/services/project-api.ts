@@ -53,7 +53,7 @@ export class ProjectsService {
                 description: "Platform e-commerce",
                 images: [],
                 tags: ['Angular', 'Tailwind CSS', 'Primeng'],
-                "livePreviewUrl": "template-fe-demo.up.railway.app",
+                "livePreviewUrl": "https://template-fe-demo.up.railway.app/",
                 sourceCodeUrl: '#',
                 caseStudyUrl: '#', // Added for consistency
                 type: 'Aplikasi Web',
@@ -68,7 +68,7 @@ export class ProjectsService {
                 description: "Platform e-commerce",
                 images: [],
                 tags: ['Angular', 'Tailwind CSS', 'Primeng'],
-                livePreviewUrl: "template-fe-demo.up.railway.app/admin",
+                livePreviewUrl: "https://template-fe-demo.up.railway.app/admin",
                 sourceCodeUrl: '#',
                 caseStudyUrl: '#', // Added for consistency
                 type: 'Aplikasi Web',
