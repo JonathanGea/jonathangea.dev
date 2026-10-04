@@ -1,0 +1,23 @@
+{
+  "slug": "dashboard-e-commerce",
+  "id": "afsd",
+  "title": "Dashboard E-Commerce",
+  "description": "Dashboard pengelolaan e-commerce",
+  "images": [
+    "images/admin-product-management.png",
+    "images/admin-inventory.png",
+    "images/admin-stock-history.png"
+  ],
+  "tags": [
+    "Angular",
+    "Tailwind CSS",
+    "Primeng"
+  ],
+  "livePreviewUrl": "https://template-fe-demo.up.railway.app/admin",
+  "type": "Aplikasi Web",
+  "domain": "E-commerce",
+  "featured": true,
+  "year": 2023,
+  "cover": "images/admin-product-management.png",
+  "order": 2
+}

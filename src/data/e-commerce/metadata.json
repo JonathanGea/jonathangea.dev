@@ -1,0 +1,29 @@
+{
+  "slug": "e-commerce",
+  "id": "a",
+  "title": "E-Commerce",
+  "description": "Platform e-commerce",
+  "images": [
+    "images/portfolio-cover.png",
+    "images/product-listing.png",
+    "images/product-search.png",
+    "images/product-detail.png",
+    "images/shopping-cart.png",
+    "images/mobile-home.png",
+    "images/mobile-product-listing.png",
+    "images/mobile-product-detail.png",
+    "images/mobile-product-variant.png"
+  ],
+  "tags": [
+    "Angular",
+    "Tailwind CSS",
+    "Primeng"
+  ],
+  "livePreviewUrl": "https://template-fe-demo.up.railway.app/",
+  "type": "Aplikasi Web",
+  "domain": "E-commerce",
+  "featured": true,
+  "year": 2023,
+  "cover": "images/portfolio-cover.png",
+  "order": 1
+}

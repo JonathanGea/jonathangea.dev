@@ -1,0 +1,9 @@
+.project-gallery { touch-action: pan-y; cursor: grab; }
+.project-gallery:active { cursor: grabbing; }
+.gallery-track { transition: transform 250ms ease; }
+.gallery-arrow { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: rgb(255 255 255 / 92%); color: #111827; font-size: 28px; cursor: pointer; box-shadow: 0 1px 6px #0002; }
+.gallery-dot { display: grid; place-items: center; width: 24px; height: 32px; cursor: pointer; }
+.gallery-dot span { width: 6px; height: 6px; border-radius: 50%; background: #ffffff70; }
+.gallery-dot span.active { background: white; }
+.project-gallery:focus-visible, .gallery-arrow:focus-visible, .gallery-dot:focus-visible { outline: 2px solid #2563eb; outline-offset: -2px; }
+@media (prefers-reduced-motion: reduce) { .gallery-track { transition: none; } }

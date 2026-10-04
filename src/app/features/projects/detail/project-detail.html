@@ -1,0 +1,20 @@
+<main class="pt-32 pb-20 px-4 bg-gray-50 min-h-screen">
+  <div class="max-w-4xl mx-auto">
+    <a routerLink="/" fragment="projects" class="inline-block text-sm text-gray-600 hover:text-black mb-8">← Kembali ke proyek</a>
+    <ng-container *ngIf="project() as project; else missing">
+      <header class="mb-10">
+        <div class="flex gap-3 text-sm text-gray-500 mb-3"><span>{{ project.type }}</span><span>·</span><span>{{ project.domain }}</span><span *ngIf="project.year">· {{ project.year }}</span></div>
+        <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-5">{{ project.title }}</h1>
+        <p class="text-lg text-gray-600 leading-relaxed mb-5">{{ project.description }}</p>
+        <div class="flex flex-wrap gap-2 mb-6"><span *ngFor="let tag of project.tags" class="bg-white border rounded-full px-3 py-1 text-sm">{{ tag }}</span></div>
+        <a *ngIf="project.livePreviewUrl" [href]="project.livePreviewUrl" target="_blank" rel="noopener noreferrer" class="inline-block bg-black text-white px-5 py-3 rounded-lg text-sm">Buka Live Demo ↗</a>
+      </header>
+      <article class="markdown-content bg-white rounded-2xl border p-5 md:p-10" [innerHTML]="project.contentHtml"></article>
+      <a routerLink="/" fragment="projects" class="inline-block mt-10 text-sm hover:underline">← Lihat proyek lainnya</a>
+    </ng-container>
+    <ng-template #missing>
+      <h1 class="text-3xl font-bold mb-4">Proyek tidak ditemukan</h1>
+      <p class="text-gray-600">Proyek yang Anda cari belum tersedia. Kembali ke daftar untuk melihat proyek lainnya.</p>
+    </ng-template>
+  </div>
+</main>

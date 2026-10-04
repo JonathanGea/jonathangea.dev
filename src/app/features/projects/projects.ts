@@ -1,186 +1,65 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // Import yang hilang
-import { ProjectsService } from './services/project-api';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ProjectsService } from './services/project-api';
+import { Project } from './project.model';
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  images: string[];
-  type: 'Aplikasi Web' | 'Desain UI/UX' | 'Aplikasi Mobile';
-  domain: 'FnB' | 'Media & Pemberitaan' | 'Travel' | 'E-commerce' | 'Fintech' | 'Pendidikan' | 'Kesehatan';
-  tags: string[];
-  livePreviewUrl?: string;
-  caseStudyUrl?: string;
-  year?: number;
-  currentIndex: number;
-}
+export type { Project } from './project.model';
 
 @Component({
   selector: 'app-projects',
-  imports: [CommonModule],
-  providers: [ProjectsService],
+  imports: [CommonModule, RouterLink],
   templateUrl: './projects.html',
   styleUrl: './projects.css'
 })
-export class Projects implements OnInit, OnDestroy { // Nama class harus PascalCase
-  private autoSlideInterval: any;
+export class Projects {
+  projects: Project[] = [];
+  selectedDomains: string[] = [];
+  private slideIndexes: Record<string, number> = {};
+  private swipe: { id: string; pointerId: number; x: number; y: number } | null = null;
 
-  public availableDomains: string[] = ['FnB','Media & Pemberitaan', 'Travel', 'E-commerce', 'Fintech', 'Pendidikan', 'Kesehatan'];
-  public selectedDomains: string[] = [];
-
-  private projectsSubject = new BehaviorSubject<Project[]>([]);
-  public projects$: Observable<Project[]> = this.projectsSubject.asObservable();
-
-  constructor(private projectsService: ProjectsService) { }
-
-  ngOnInit(): void {
-    this.loadProjects();
+  images(project: Project): string[] {
+    return project.images.length ? project.images : [project.cover];
+  }
+  slideIndex(project: Project): number {
+    return this.slideIndexes[project.id] ?? 0;
+  }
+  goToSlide(project: Project, index: number): void {
+    const count = this.images(project).length;
+    this.slideIndexes[project.id] = ((index % count) + count) % count;
+  }
+  moveSlide(project: Project, direction: number): void {
+    this.goToSlide(project, this.slideIndex(project) + direction);
+  }
+  startSwipe(event: PointerEvent, project: Project): void {
+    if (!event.isPrimary || event.button !== 0 || (event.target as HTMLElement).closest('button')) return;
+    this.swipe = { id: project.id, pointerId: event.pointerId, x: event.clientX, y: event.clientY };
+    (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
+  }
+  endSwipe(event: PointerEvent, project: Project): void {
+    const swipe = this.swipe;
+    if (!swipe || swipe.id !== project.id || swipe.pointerId !== event.pointerId) return;
+    this.swipe = null;
+    const dx = event.clientX - swipe.x;
+    const dy = event.clientY - swipe.y;
+    if (Math.abs(dx) >= 45 && Math.abs(dx) > Math.abs(dy)) this.moveSlide(project, dx < 0 ? 1 : -1);
+  }
+  cancelSwipe(): void {
+    this.swipe = null;
   }
 
-  private loadProjects(): void {
-    this.projectsService.getProjects().subscribe({
-      next: (projects) => {
-        const projectsWithIndex = projects.map(p => ({
-          ...p,
-          currentIndex: p.currentIndex || 0
-        }));
-        this.projectsSubject.next(projectsWithIndex);
-        this.startAutoSlide();
-      },
-      error: (err) => console.error('Error loading projects:', err)
-    });
+  constructor() {
+    inject(ProjectsService).getProjects().subscribe(projects => this.projects = projects);
   }
-
-  private startAutoSlide(): void {
-    this.autoSlideInterval = setInterval(() => {
-      const currentProjects = this.projectsSubject.value;
-      const updatedProjects = currentProjects.map(project => {
-        if (project.images.length > 1) {
-          return {
-            ...project,
-            currentIndex: (project.currentIndex + 1) % project.images.length
-          };
-        }
-        return project;
-      });
-      this.projectsSubject.next(updatedProjects);
-    }, 5000);
+  get availableDomains(): string[] {
+    return [...new Set(this.projects.map(project => project.domain))];
   }
-
-  public toggleDomain(domain: string): void {
-    if (this.selectedDomains.includes(domain)) {
-      this.selectedDomains = this.selectedDomains.filter(d => d !== domain);
-    } else {
-      this.selectedDomains = [...this.selectedDomains, domain];
-    }
-    this.filterProjects();
+  get filteredProjects(): Project[] {
+    return this.projects.filter(project => !this.selectedDomains.length || this.selectedDomains.includes(project.domain));
   }
-
-  public filterProjects(): void {
-    this.projectsService.getProjects().pipe(
-      map(projects => {
-        if (this.selectedDomains.length > 0) {
-          return projects.filter(project =>
-            project.domain && this.selectedDomains.includes(project.domain)
-          );
-        }
-        return projects;
-      })
-    ).subscribe(filteredProjects => {
-      // Initialize currentIndex for filtered projects
-      const projectsWithIndex = filteredProjects.map(p => ({
-        ...p,
-        currentIndex: p.currentIndex || 0
-      }));
-      this.projectsSubject.next(projectsWithIndex);
-    });
-  }
-
-  public nextImage(project: Project, event: Event): void {
-    event.stopPropagation();
-    const currentIndex = project.currentIndex ?? 0;
-    this.updateProjectIndex(project, (currentIndex + 1) % project.images.length);
-  }
-
-  public prevImage(project: Project, event: Event): void {
-    event.stopPropagation();
-    const currentIndex = project.currentIndex ?? 0;
-    this.updateProjectIndex(
-      project,
-      (currentIndex - 1 + project.images.length) % project.images.length
-    );
-  }
-
-  private updateProjectIndex(project: Project, newIndex: number): void {
-    const projects = this.projectsSubject.value.map(p =>
-      p.id === project.id ? { ...p, currentIndex: newIndex } : p
-    );
-    this.projectsSubject.next(projects); // Gunakan projectsSubject, bukan projects$
-  }
-
-  public goToSlide(project: Project, index: number, event: Event): void {
-    event.stopPropagation();
-    this.updateProjectIndex(project, index);
-  }
-
-  ngOnDestroy(): void {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-    }
-  }
-
-  private dragState: Record<string, { startX: number; deltaX: number; dragging: boolean }> = {};
-
-  public onDragStart(event: PointerEvent, project: Project): void {
-    event.preventDefault();
-    const id = project.id;
-    this.dragState[id] = {
-      startX: event.clientX,
-      deltaX: 0,
-      dragging: true
-    };
-    (event.target as HTMLElement).setPointerCapture(event.pointerId);
-  }
-
-  public onDragMove(event: PointerEvent, project: Project): void {
-    const state = this.dragState[project.id];
-    if (!state || !state.dragging) return;
-    state.deltaX = event.clientX - state.startX;
-    // optional: visual feedback could be added here (e.g., temporary transform)
-  }
-
-  public onDragEnd(event: PointerEvent, project: Project): void {
-    const state = this.dragState[project.id];
-    if (!state || !state.dragging) return;
-    const threshold = 50; // px minimal untuk dianggap swipe
-    if (state.deltaX > threshold) {
-      this.prevImage(project, event);
-    } else if (state.deltaX < -threshold) {
-      this.nextImage(project, event);
-    }
-    state.dragging = false;
-    state.deltaX = 0;
-  }
-
-  public isDragging(project: Project): boolean {
-    const state = this.dragState[project.id];
-    return !!state?.dragging;
-  }
-
-  // Auto slide control
-  public pauseAutoSlide(): void {
-    if (this.autoSlideInterval) {
-      clearInterval(this.autoSlideInterval);
-      this.autoSlideInterval = null;
-    }
-  }
-
-  public resumeAutoSlide(): void {
-    if (!this.autoSlideInterval) {
-      this.startAutoSlide();
-    }
+  toggleDomain(domain: string): void {
+    this.selectedDomains = this.selectedDomains.includes(domain)
+      ? this.selectedDomains.filter(selected => selected !== domain)
+      : [...this.selectedDomains, domain];
   }
 }
