@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+@import "./app/features/ui-ux-prompt-library/pages/prompt-library/prompt-library.css";
 
 
 html {

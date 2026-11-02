@@ -6,7 +6,8 @@
     </a>
 
     <div class="hidden md:flex items-center justify-center space-x-2">
-      <a routerLink="/" (click)="isMobileMenuOpen = false" class="rounded-md px-4 py-2 text-sm font-medium text-neutral-600 transition-colors duration-300 hover:bg-black/10 hover:text-neutral-900">Beranda</a>
+      <a routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen = false" class="rounded-md px-4 py-2 text-sm font-medium text-neutral-600 transition-colors duration-300 hover:bg-black/10 hover:text-neutral-900">Beranda</a>
+      <a routerLink="/ui-ux-prompt-library" routerLinkActive="nav-active" (click)="isMobileMenuOpen = false" class="rounded-md px-4 py-2 text-sm font-medium text-neutral-600 transition-colors duration-300 hover:bg-black/10 hover:text-neutral-900">UI/UX Prompt Library</a>
       <a routerLink="/" fragment="projects" (click)="isMobileMenuOpen = false" class="rounded-md px-4 py-2 text-sm font-medium text-neutral-600 transition-colors duration-300 hover:bg-black/10 hover:text-neutral-900">Contoh</a>
       <a routerLink="/" fragment="contact" (click)="isMobileMenuOpen = false" class="rounded-md px-4 py-2 text-sm font-medium text-neutral-600 transition-colors duration-300 hover:bg-black/10 hover:text-neutral-900">Kontak</a>
     </div>
@@ -36,7 +37,8 @@
   <div *ngIf="isMobileMenuOpen" class="container mx-auto mt-2 md:hidden"
        [ngClass]="{ 'block': isMobileMenuOpen, 'hidden': !isMobileMenuOpen }">
     <div class="space-y-1 rounded-2xl border border-white/10 bg-black/5 p-2 shadow-lg backdrop-blur-xl">
-      <a routerLink="/" (click)="isMobileMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-black/10 hover:text-neutral-900">Beranda</a>
+      <a routerLink="/" routerLinkActive="nav-active" [routerLinkActiveOptions]="{exact: true}" (click)="isMobileMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-black/10 hover:text-neutral-900">Beranda</a>
+      <a routerLink="/ui-ux-prompt-library" routerLinkActive="nav-active" (click)="isMobileMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-black/10 hover:text-neutral-900">UI/UX Prompt Library</a>
       <a routerLink="/" fragment="projects" (click)="isMobileMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-black/10 hover:text-neutral-900">Contoh</a>
       <a routerLink="/" fragment="contact" (click)="isMobileMenuOpen = false" class="block rounded-md px-3 py-2 text-base font-medium text-neutral-700 transition-colors hover:bg-black/10 hover:text-neutral-900">Kontak</a>
       <a routerLink="/" fragment="contact" (click)="isMobileMenuOpen = false" class="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-neutral-900 px-5 py-2.5 text-base font-semibold text-white transition-colors duration-300 hover:bg-neutral-700">
