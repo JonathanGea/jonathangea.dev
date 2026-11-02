@@ -1,0 +1,1 @@
+<div class="magnetic-target" (pointermove)="move($event)" (pointerleave)="transform = ''"><button class="magnetic primary" [style.transform]="transform" (click)="activated = !activated">{{activated ? 'You’re in ✓' : 'Explore more ↗'}}</button></div><span class="motion-caption" role="status">{{activated ? 'Thanks for exploring.' : 'Move your pointer or tap the button.'}}</span>

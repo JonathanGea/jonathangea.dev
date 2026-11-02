@@ -1,0 +1,11 @@
+<dialog #dialog aria-labelledby="prompt-detail-title" aria-describedby="prompt-detail-description" (click)="backdrop($event)" (keydown)="trapFocus($event)" (close)="dismissed.emit()">
+  <div class="detail-body">
+    <header><div><span class="category">{{prompt.category}}</span><h2 id="prompt-detail-title">{{prompt.title}}</h2></div><button type="button" class="close" aria-label="Close prompt detail" (click)="close()" autofocus>×</button></header>
+    <p id="prompt-detail-description">{{prompt.description}}</p>
+    <div class="stage"><app-prompt-preview [previewId]="prompt.previewId" [generation]="generation" /></div>
+    <div class="preview-meta"><ul aria-label="Tags">@for (tag of prompt.tags; track tag) {<li>#{{tag}}</li>}</ul><button type="button" class="replay" (click)="generation = generation + 1">↻ Replay preview</button></div>
+    <div class="prompt-heading"><h3>AI prompt</h3><span>Copy, customize, create.</span></div>
+    <div #promptText class="prompt-text" tabindex="0">{{prompt.prompt}}</div>
+    <div class="copy-row"><p role="status" aria-live="polite">{{copyStatus}}</p><button type="button" class="copy" (click)="copy()">⧉ Copy prompt</button></div>
+  </div>
+</dialog>

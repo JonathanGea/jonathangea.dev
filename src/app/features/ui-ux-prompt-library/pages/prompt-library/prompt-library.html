@@ -1,0 +1,21 @@
+<main id="prompt-library-top">
+  <section class="hero shell" aria-labelledby="library-title">
+    <a class="back" routerLink="/">← JonathanGea / Resources</a>
+    <div class="eyebrow"><span></span> The visual-first prompt library</div>
+    <h1 id="library-title">Better prompts.<br><span>Better interfaces.</span></h1>
+    <p class="intro">Discover thoughtfully crafted UI/UX prompts, explore interactive previews, and turn ideas into polished interfaces with AI.</p>
+    <div class="hero-actions"><a class="primary" routerLink="/ui-ux-prompt-library" fragment="library">Explore prompts ↗</a><a class="secondary" routerLink="/ui-ux-prompt-library" fragment="how-it-works">How it works</a></div>
+    <div class="stats"><span><b>{{prompts.length}}</b> curated prompts</span><span><b>{{categories.length - 1}}</b> categories</span><span><b>100%</b> free to explore</span></div>
+    <div class="hero-mark" aria-hidden="true">✳</div>
+  </section>
+  <section id="library" class="collection shell" aria-labelledby="collection-title">
+    <div class="collection-header"><div><div class="eyebrow">The collection</div><h2 id="collection-title">Explore the library<span>.</span></h2><p>Browse by purpose, try the preview, copy the prompt.</p></div><app-prompt-search [(value)]="query" /></div>
+    <app-prompt-filter [categories]="categories" [(selected)]="category" />
+    <div class="results"><p role="status" aria-live="polite">Showing {{filteredPrompts.length}} of {{prompts.length}} prompts</p><span>Live previews. Real interactions. ↗</span></div>
+    <div class="gallery">@for (prompt of filteredPrompts; track prompt.id) {<app-prompt-card [prompt]="prompt" (open)="selected = $event" />}</div>
+    @if (!filteredPrompts.length) {<div class="empty"><h3>No matching prompts.</h3><p>Try a different search or category.</p><button class="secondary" (click)="reset()">Clear search & filters</button></div>}
+  </section>
+  <section id="how-it-works" class="about" aria-labelledby="about-title"><div class="shell"><div class="eyebrow">Simple by design</div><h2 id="about-title">From inspiration to implementation.</h2><div class="steps"><div><span>01 / Discover</span><h3>Find the right idea</h3><p>Explore prompts for pages, components, visual styles, motion, and UX improvements.</p></div><div><span>02 / Preview</span><h3>See the intended result</h3><p>Try real interactions and replay animations before choosing a direction.</p></div><div><span>03 / Build</span><h3>Copy and customize</h3><p>Paste a structured prompt into your AI coding assistant and adapt it to your project.</p></div></div></div></section>
+  <footer class="shell"><span>JonathanGea · UI/UX Prompt Library</span><a routerLink="/ui-ux-prompt-library" fragment="prompt-library-top">Back to top ↑</a></footer>
+</main>
+@if (selected; as prompt) {<app-prompt-detail [prompt]="prompt" (dismissed)="selected = null" />}

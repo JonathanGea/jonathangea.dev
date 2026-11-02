@@ -1,0 +1,23 @@
+# UI/UX Prompt Library
+
+Standalone Angular feature, lazy-loaded at `/ui-ux-prompt-library`. The 15 entries and original prompt text come from the supplied `index-28.html` reference; no external runtime, backend, iframe, or remote images are required by this feature.
+
+- `data/prompts.json`: metadata and prompt text only. `id` and `slug` must be unique.
+- `data/prompt-catalog.ts`: catalog validation and category derivation.
+- `previews/`: independent standalone previews, with locally scoped styles and cleanup for observers/timers.
+- `previews/preview-registry.ts`: the sole `previewId` → component mapping.
+- `components/`: reusable search, filter, card, dynamic preview host, and native dialog.
+- `pages/prompt-library/`: collection state and page layout.
+
+To add a prompt, create its standalone component under `previews/`, register its key, and add the JSON entry using that key as `previewId`. Keep template markup out of JSON. Replaying remounts only the selected preview and resets its local state.
+
+The native modal provides keyboard focus containment and Escape dismissal. Closing restores focus and body scrolling. Clipboard success is announced only after writing succeeds; denied clipboard access selects the prompt for manual copying. Motion respects `prefers-reduced-motion`. Toast auto-dismiss pauses while either pointer or keyboard focus remains inside the notification.
+
+Validation from the repository root:
+
+```sh
+npm run build
+CHROME_BIN=/usr/bin/chromium npm test -- --watch=false --browsers=ChromeHeadless
+```
+
+Browser review should cover the desktop/mobile menu, all preview controls, combined search/category filters, empty-result reset, every modal's registry mapping, replay and copy, Tab/Shift+Tab/Escape behavior, reduced motion, and the existing `/` and `/projects/portal-berita` routes. Commerce cart, subscription, and dashboard data are local demos with explicit feedback, not backend operations.

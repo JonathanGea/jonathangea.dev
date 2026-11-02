@@ -1,0 +1,9 @@
+/* Library theme stays scoped to the shared navigation. */
+.library-active { background: #d5ff78; color: #17200b; }
+.library-nav > div { background-color: rgb(12 13 16 / 92%); border-color: #393c46; }
+.library-nav a, .library-nav a span, .library-nav button { color: #e6e8ef; }
+.library-nav a.library-active { background: #d5ff78; color: #17200b; }
+.library-nav #mobile-navigation > div { background: #17181e; border-color: #393c46; }
+.library-nav a:hover { background-color: #ffffff16; }
+.library-nav a.library-active:hover { background-color: #c3ed68; }
+a:focus-visible, button:focus-visible { outline: 2px solid #7480fa; outline-offset: 3px; }

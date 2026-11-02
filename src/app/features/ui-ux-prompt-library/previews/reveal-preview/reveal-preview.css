@@ -1,0 +1,1 @@
+.reveal{text-align:center;padding:12px}.reveal h3{font-size:clamp(28px,3.5vw,42px);letter-spacing:-1px}.reveal span{color:#d5ff78}.reveal p{margin-top:10px;color:#c2c4cd}.reveal.visible h3,.reveal.visible p{animation:reveal-in .7s both}.reveal.visible p{animation-delay:.15s}@keyframes reveal-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}

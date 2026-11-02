@@ -1,0 +1,15 @@
+<div class="window dashboard">
+  <div class="window-bar"><span></span><span></span><span></span><b>Metric / workspace</b></div>
+  <div class="dashboard-layout">
+    <aside [class.collapsed]="collapsed"><button aria-label="Toggle dashboard sidebar" [attr.aria-expanded]="!collapsed" (click)="collapsed = !collapsed">☰</button>
+      @if (!collapsed) { @for (name of sections; track name) { <button [class.active]="section === name" (click)="section = name">{{name}}</button> } }
+    </aside>
+    <div class="dashboard-content"><div class="row"><h3>{{section}}</h3><select aria-label="Dashboard date range" [value]="period" (change)="period = $any($event.target).value"><option value="30">Last 30 days</option><option value="7">Last 7 days</option></select></div>
+      @if (section === 'Overview') {
+        <div class="metrics"><div><small>Revenue</small><strong>{{period === '30' ? '$24.8k' : '$6.2k'}}</strong></div><div><small>Visitors</small><strong>{{period === '30' ? '1,284' : '324'}}</strong></div><div><small>Conversion</small><strong>{{period === '30' ? '8.6%' : '9.1%'}}</strong></div></div>
+        <div class="chart" role="img" [attr.aria-label]="'Revenue trend for the last ' + period + ' days'">@for (height of bars; track $index) {<div [style.height.%]="period === '30' ? height : 100 - height"><span>{{height}}</span></div>}</div><small>Revenue trend · USD · {{period}} days</small>
+      } @else if (section === 'Customers') {<table><caption>Recent customers</caption><thead><tr><th>Name</th><th>Plan</th></tr></thead><tbody><tr><td>Avery Chen</td><td>Pro</td></tr><tr><td>Rina Putri</td><td>Team</td></tr></tbody></table>}
+      @else {<h4>Workspace settings</h4><label class="row">Weekly reports<input type="checkbox" [checked]="reports" (change)="reports = !reports"></label>}
+    </div>
+  </div>
+</div>
