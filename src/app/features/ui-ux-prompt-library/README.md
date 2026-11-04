@@ -1,6 +1,6 @@
 # UI/UX Prompt Library
 
-Standalone Angular feature, lazy-loaded at `/ui-ux-prompt-library`. The 15 entries and original prompt text come from the supplied `index-28.html` reference; no external runtime, backend, iframe, or remote images are required by this feature.
+Standalone Angular feature, lazy-loaded at `/ui-ux-prompt-library`. The catalog contains 13 Layout prompts, including Bento Grid and twelve web page patterns; no external runtime, backend, iframe, or remote images are required by this feature.
 
 - `data/prompts.json`: metadata and prompt text only. `id` and `slug` must be unique.
 - `data/prompt-catalog.ts`: catalog validation and category derivation.
