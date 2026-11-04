@@ -61,7 +61,7 @@ describe('Prompt Library', () => {
     const layout = Array.from(root.querySelectorAll<HTMLButtonElement>('app-prompt-filter button')).find(button => button.textContent?.trim() === 'Layout')!;
     layout.click(); fixture.detectChanges();
     expect(root.querySelectorAll('app-prompt-card').length).toBe(0);
-    expect(root.textContent).toContain('No matching prompts.');
+    expect(root.textContent).toContain('Prompt tidak ditemukan.');
     root.querySelector<HTMLButtonElement>('.empty button')!.click(); fixture.detectChanges();
     expect(root.querySelectorAll('app-prompt-card').length).toBe(PROMPTS.length);
     expect(input.value).toBe('');
@@ -161,13 +161,13 @@ describe('Prompt details', () => {
     const copy = spyOn(navigator.clipboard, 'writeText').and.resolveTo();
     await fixture.componentInstance.copy(); fixture.detectChanges();
     expect(copy).toHaveBeenCalledWith(PROMPTS[0].prompt);
-    expect(fixture.nativeElement.textContent).toContain('Prompt copied');
+    expect(fixture.nativeElement.textContent).toContain('Prompt disalin');
   });
 
   it('selects the text and explains a denied clipboard instead of claiming success', async () => {
     spyOn(navigator.clipboard, 'writeText').and.rejectWith(new Error('Denied'));
     await fixture.componentInstance.copy(); fixture.detectChanges();
-    expect(fixture.componentInstance.copyStatus).toContain('Clipboard unavailable');
+    expect(fixture.componentInstance.copyStatus).toContain('Clipboard tidak tersedia.');
     expect(document.getSelection()?.toString()).toBe(PROMPTS[0].prompt);
   });
 });

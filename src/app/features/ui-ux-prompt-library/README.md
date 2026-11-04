@@ -27,3 +27,7 @@ Browser review should cover the desktop/mobile menu, all preview controls, combi
 The Layout category includes all twelve reference patterns: Single Column, Two Column, Grid Layout, F-Pattern, Z-Pattern, Split Screen, Magazine, Asymmetrical, Holy Grail, Masonry, Hero Landing, and Full-Screen. Search their names or use-case tags, open details, and copy the implementation prompt.
 
 `layout-*` registry keys use `LayoutPreview`; `PromptPreview` passes the key suffix as its required layout input. Shared static browser chrome and per-pattern CSS keep wireframes consistent in cards and dialogs. F/Z overlays illustrate scanning paths; masonry uses varied card heights while grid uses aligned rows. These are compact structural diagrams, not full website demos; each copied prompt specifies responsive behavior for the resulting implementation. No external assets or new dependencies are needed.
+
+## Library interface
+
+The surrounding library UI follows the portfolio homepage: white surfaces, neutral text and borders, bold headings with an outline accent, and black primary actions. The shared navbar uses the same surface across routes; the current library link retains a neutral active indicator. Search, category filters, cards, empty state, details, and clipboard feedback use Indonesian labels; catalog names and AI prompt text remain unchanged. Demo components retain their own visual styles to illustrate different UI patterns. A skip link leads directly to the collection.
