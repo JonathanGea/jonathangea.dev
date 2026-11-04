@@ -1,10 +1,10 @@
 <article class="tile" [attr.data-prompt-id]="prompt.id">
   <div class="stage"><app-prompt-preview [previewId]="prompt.previewId" [generation]="generation" /></div>
   <div class="card-body">
-    <div class="category-row"><span class="category">{{prompt.category}}</span><button class="replay" type="button" (click)="generation = generation + 1" [attr.aria-label]="'Replay ' + prompt.title">↻ Replay</button></div>
+    <div class="category-row"><span class="category">{{prompt.category}}</span><button class="replay" type="button" (click)="generation = generation + 1" [attr.aria-label]="'Atur ulang pratinjau ' + prompt.title">↻ Atur ulang</button></div>
     <h3><button type="button" (click)="open.emit(prompt)" aria-haspopup="dialog">{{prompt.title}} <span aria-hidden="true">↗</span></button></h3>
     <p>{{prompt.description}}</p>
-    <ul aria-label="Tags">@for (tag of prompt.tags; track tag) {<li>{{tag}}</li>}</ul>
-    <button class="view" type="button" (click)="open.emit(prompt)" [attr.aria-label]="'View prompt: ' + prompt.title" aria-haspopup="dialog">View prompt <span aria-hidden="true">↗</span></button>
+    <ul aria-label="Tag">@for (tag of prompt.tags; track tag) {<li>{{tag}}</li>}</ul>
+    <button class="view" type="button" (click)="open.emit(prompt)" [attr.aria-label]="'Lihat prompt: ' + prompt.title" aria-haspopup="dialog">Lihat prompt <span aria-hidden="true">↗</span></button>
   </div>
 </article>

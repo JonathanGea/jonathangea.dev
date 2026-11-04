@@ -1,6 +1,6 @@
-import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +9,6 @@ import { Component, inject } from '@angular/core';
   styleUrl: './navbar.css'
 })
 export class Navbar {
-  private router = inject(Router);
-  get isLibrary() { return this.router.url.split(/[?#]/)[0] === '/ui-ux-prompt-library'; }
   isMobileMenuOpen = false;
 
   toggleMobileMenu() {

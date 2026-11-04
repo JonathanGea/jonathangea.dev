@@ -54,7 +54,7 @@ export class PromptDetail implements AfterViewInit, OnDestroy {
   async copy() {
     try {
       await navigator.clipboard.writeText(this.prompt.prompt);
-      this.copyStatus = '✓ Prompt copied';
+      this.copyStatus = '✓ Prompt disalin';
     } catch {
       // Keep a readable, selectable prompt available when clipboard access is denied.
       const selection = this.document.getSelection();
@@ -63,7 +63,7 @@ export class PromptDetail implements AfterViewInit, OnDestroy {
       selection?.removeAllRanges();
       selection?.addRange(range);
       this.promptText.nativeElement.focus();
-      this.copyStatus = 'Clipboard unavailable. Prompt selected; use your device’s Copy command.';
+      this.copyStatus = 'Clipboard tidak tersedia. Teks prompt dipilih; gunakan perintah Salin pada perangkat Anda.';
     }
   }
 
