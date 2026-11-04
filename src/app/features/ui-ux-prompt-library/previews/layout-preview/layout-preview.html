@@ -1,0 +1,17 @@
+<div class="browser" aria-hidden="true">
+  <div class="chrome"><i></i><i></i><i></i><span></span></div>
+  <div class="canvas" [class]="'canvas ' + layout">
+    <div class="top"><b>STUDIO / JOURNAL</b><span>Explore · About</span></div>
+    <div class="composition">
+      <aside class="left"><i></i><i></i><i></i><i></i></aside>
+      <div class="lead"><span class="art">✳</span><b>Ideas take shape.</b><i></i><i></i><i></i><em>Explore →</em></div>
+      <div class="support"><span class="art">◉</span><b>A fresh perspective</b><i></i><i></i></div>
+      <div class="extra"><span class="art">◈</span><b>Made for you</b><i></i><i></i></div>
+      <div class="small one"><i></i><i></i></div><div class="small two"><i></i><i></i></div><div class="small three"><i></i><i></i></div>
+    </div>
+    <div class="foot">Thoughtfully made. <span>Discover more →</span></div>
+    @if (layout === 'f-pattern' || layout === 'z-pattern') {
+      <svg class="reading-path" viewBox="0 0 300 180" preserveAspectRatio="none"><path [attr.d]="layout === 'f-pattern' ? 'M25 165 V25 H275 M25 82 H205' : 'M25 25 H275 L25 155 H275'" /></svg>
+    }
+  </div>
+</div>

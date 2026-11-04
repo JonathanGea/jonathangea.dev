@@ -208,5 +208,185 @@
     ],
     "slug": "loading-skeleton",
     "previewId": "skeleton"
+  },
+  {
+    "id": "layout-single-column",
+    "slug": "layout-single-column",
+    "title": "Single Column",
+    "description": "Long reads, blogs, and mobile reading.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "article",
+      "blog",
+      "mobile"
+    ],
+    "previewId": "layout-single-column",
+    "prompt": "Build a responsive Single Column web page layout for long reads, blogs, and mobile reading. Keep one centered reading column with a constrained line length, a lead image, and a clear heading hierarchy. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-two-column",
+    "slug": "layout-two-column",
+    "title": "Two Column",
+    "description": "Documentation, dashboards, and admin workspaces.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "docs",
+      "dashboard",
+      "admin"
+    ],
+    "previewId": "layout-two-column",
+    "prompt": "Build a responsive Two Column web page layout for documentation, dashboards, and admin workspaces. Place contextual navigation beside a wider main content column. Stack navigation above content on narrow screens. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-grid",
+    "slug": "layout-grid",
+    "title": "Grid Layout",
+    "description": "Product lists and galleries.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "products",
+      "gallery",
+      "cards"
+    ],
+    "previewId": "layout-grid",
+    "prompt": "Build a responsive Grid Layout web page layout for product lists and galleries. Use equal-sized cards in aligned rows and columns with consistent gaps. Reduce column count responsively. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-f-pattern",
+    "slug": "layout-f-pattern",
+    "title": "F-Pattern",
+    "description": "Text-heavy pages people scan.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "text",
+      "scanning",
+      "reading"
+    ],
+    "previewId": "layout-f-pattern",
+    "prompt": "Build a responsive F-Pattern web page layout for text-heavy pages people scan. Use a strong top heading, a second shorter horizontal content band, and left-aligned summaries to support F-shaped scanning. Preserve logical reading order. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-z-pattern",
+    "slug": "layout-z-pattern",
+    "title": "Z-Pattern",
+    "description": "Landing pages with one primary call to action.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "landing",
+      "conversion",
+      "cta"
+    ],
+    "previewId": "layout-z-pattern",
+    "prompt": "Build a responsive Z-Pattern web page layout for landing pages with one primary call to action. Arrange brand and navigation across the top, a central visual connecting the composition, then supporting copy and one primary CTA along the bottom. Preserve DOM reading order. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-split-screen",
+    "slug": "layout-split-screen",
+    "title": "Split Screen",
+    "description": "Image and pitch, or a comparison of two options.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "image",
+      "pitch",
+      "comparison"
+    ],
+    "previewId": "layout-split-screen",
+    "prompt": "Build a responsive Split Screen web page layout for image and pitch, or a comparison of two options. Divide the desktop viewport into two balanced panels: a visual and its pitch, or two equally weighted options. Stack panels on mobile. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-magazine",
+    "slug": "layout-magazine",
+    "title": "Magazine",
+    "description": "News sites and ranked stories.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "news",
+      "editorial",
+      "stories"
+    ],
+    "previewId": "layout-magazine",
+    "prompt": "Build a responsive Magazine web page layout for news sites and ranked stories. Establish a dominant lead story, a supporting story rail, and smaller secondary articles beneath. Keep editorial priority when stacking on mobile. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-asymmetrical",
+    "slug": "layout-asymmetrical",
+    "title": "Asymmetrical",
+    "description": "Portfolios and bold campaigns.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "portfolio",
+      "campaign",
+      "creative"
+    ],
+    "previewId": "layout-asymmetrical",
+    "prompt": "Build a responsive Asymmetrical web page layout for portfolios and bold campaigns. Balance one large visual with smaller offset supporting panels. Use an intentional uneven grid without changing semantic reading order. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-holy-grail",
+    "slug": "layout-holy-grail",
+    "title": "Holy Grail",
+    "description": "Apps with navigation, content, and extras.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "app",
+      "sidebar",
+      "navigation"
+    ],
+    "previewId": "layout-holy-grail",
+    "prompt": "Build a responsive Holy Grail web page layout for apps with navigation, content, and extras. Use a full-width header and footer around a three-column body: navigation, flexible main content, and contextual extras. Collapse sidebars in logical order on mobile. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-masonry",
+    "slug": "layout-masonry",
+    "title": "Masonry",
+    "description": "Mixed-height media feeds.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "media",
+      "feed",
+      "mixed-height"
+    ],
+    "previewId": "layout-masonry",
+    "prompt": "Build a responsive Masonry web page layout for mixed-height media feeds. Arrange varied-height media cards in a masonry composition with consistent gaps and no forced equal row heights. Keep keyboard and visual reading order understandable; provide a simple stacked mobile fallback. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-hero-landing",
+    "slug": "layout-hero-landing",
+    "title": "Hero Landing",
+    "description": "Product launches and signups.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "product",
+      "launch",
+      "signup"
+    ],
+    "previewId": "layout-hero-landing",
+    "prompt": "Build a responsive Hero Landing web page layout for product launches and signups. Lead with a clear headline, value proposition, and primary signup CTA in a prominent hero, followed by three concise benefit blocks. Stack benefits on mobile. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
+  },
+  {
+    "id": "layout-full-screen",
+    "slug": "layout-full-screen",
+    "title": "Full-Screen",
+    "description": "Stories with one idea per screen.",
+    "category": "Layout",
+    "tags": [
+      "web layout",
+      "story",
+      "immersive",
+      "viewport"
+    ],
+    "previewId": "layout-full-screen",
+    "prompt": "Build a responsive Full-Screen web page layout for stories with one idea per screen. Give one idea a viewport-height section with a concise headline and focused CTA. Use min-height rather than fixed height so content remains reachable with zoom or small screens; avoid forced scroll trapping. Inspect and adapt the existing project components, routing, stack, and design tokens before implementing. Use realistic content, semantic landmarks, accessible contrast, visible keyboard focus, and meaningful image alternatives. Keep controls functional. Prevent horizontal overflow at 320px and preserve readability at 200% zoom. Respect reduced-motion preferences."
   }
 ]
