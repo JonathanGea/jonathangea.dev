@@ -19,6 +19,7 @@ export class PromptPreview implements OnInit, OnChanges {
     const component = PREVIEW_REGISTRY[this.previewId];
     if (!component) throw new Error(`Unknown preview: ${this.previewId}`);
     this.outlet.clear();
-    this.outlet.createComponent(component);
+    const ref = this.outlet.createComponent(component);
+    if (this.previewId.startsWith('layout-')) ref.setInput('layout', this.previewId.slice(7));
   }
 }

@@ -15,16 +15,38 @@ describe('Prompt Library', () => {
   it('renders every reference prompt with a registered independent preview', () => {
     const fixture = TestBed.createComponent(PromptLibrary);
     fixture.detectChanges();
-    expect(PROMPTS.length).toBe(15);
+    expect(PROMPTS.length).toBe(27);
     expect(CATEGORIES.length).toBe(7);
-    expect(new Set(PROMPTS.map(item => item.slug)).size).toBe(15);
-    expect(fixture.nativeElement.querySelectorAll('app-prompt-card').length).toBe(15);
+    expect(new Set(PROMPTS.map(item => item.slug)).size).toBe(PROMPTS.length);
+    expect(fixture.nativeElement.querySelectorAll('app-prompt-card').length).toBe(PROMPTS.length);
     for (const item of PROMPTS) {
       const component = PREVIEW_REGISTRY[item.previewId];
       expect(component).withContext(item.id).toBeDefined();
       expect(fixture.nativeElement.querySelector(`[data-prompt-id="${item.id}"] app-prompt-preview`)?.children.length)
         .withContext(item.id).toBeGreaterThan(0);
     }
+  });
+
+  it('includes all twelve reference layouts in the existing filter and detail flow', () => {
+    const fixture = TestBed.createComponent(PromptLibrary);
+    fixture.componentInstance.category = 'Layout';
+    fixture.detectChanges();
+    const layouts = PROMPTS.filter(item => item.id.startsWith('layout-'));
+    expect(layouts.length).toBe(12);
+    for (const layout of layouts) {
+      const card = fixture.nativeElement.querySelector(`[data-prompt-id="${layout.id}"]`);
+      expect(card).withContext(layout.title).not.toBeNull();
+      expect(card.querySelector('.canvas').classList.contains(layout.previewId.slice(7))).toBeTrue();
+      expect(layout.prompt).toContain('existing project');
+      fixture.componentInstance.query = layout.title;
+      expect(fixture.componentInstance.filteredPrompts).toContain(layout);
+    }
+    fixture.componentInstance.query = 'Holy Grail';
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('app-prompt-card .view').click();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('dialog .canvas.holy-grail')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('dialog .prompt-text').textContent).toContain('three-column body');
   });
 
   it('combines case-insensitive search and category filters, then resets empty results', () => {
@@ -41,7 +63,7 @@ describe('Prompt Library', () => {
     expect(root.querySelectorAll('app-prompt-card').length).toBe(0);
     expect(root.textContent).toContain('No matching prompts.');
     root.querySelector<HTMLButtonElement>('.empty button')!.click(); fixture.detectChanges();
-    expect(root.querySelectorAll('app-prompt-card').length).toBe(15);
+    expect(root.querySelectorAll('app-prompt-card').length).toBe(PROMPTS.length);
     expect(input.value).toBe('');
   });
 

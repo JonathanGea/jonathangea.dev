@@ -1,3 +1,4 @@
+import { LayoutPreview } from './layout-preview/layout-preview';
 import { Type } from '@angular/core';
 import { DashboardPreview } from './dashboard-preview/dashboard-preview';
 import { EditorialPreview } from './editorial-preview/editorial-preview';
@@ -17,6 +18,19 @@ import { SkeletonPreview } from './skeleton-preview/skeleton-preview';
 
 export const PREVIEW_REGISTRY: Readonly<Record<string, Type<unknown>>> = Object.freeze({
   page: DashboardPreview,
+  'layout-single-column': LayoutPreview,
+  'layout-two-column': LayoutPreview,
+  'layout-grid': LayoutPreview,
+  'layout-f-pattern': LayoutPreview,
+  'layout-z-pattern': LayoutPreview,
+  'layout-split-screen': LayoutPreview,
+  'layout-magazine': LayoutPreview,
+  'layout-asymmetrical': LayoutPreview,
+  'layout-holy-grail': LayoutPreview,
+  'layout-masonry': LayoutPreview,
+  'layout-hero-landing': LayoutPreview,
+  'layout-full-screen': LayoutPreview,
+
   editorial: EditorialPreview,
   commerce: CommercePreview,
   bento: BentoPreview,

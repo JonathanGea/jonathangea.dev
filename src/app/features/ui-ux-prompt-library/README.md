@@ -21,3 +21,9 @@ CHROME_BIN=/usr/bin/chromium npm test -- --watch=false --browsers=ChromeHeadless
 ```
 
 Browser review should cover the desktop/mobile menu, all preview controls, combined search/category filters, empty-result reset, every modal's registry mapping, replay and copy, Tab/Shift+Tab/Escape behavior, reduced motion, and the existing `/` and `/projects/portal-berita` routes. Commerce cart, subscription, and dashboard data are local demos with explicit feedback, not backend operations.
+
+## Web page layouts
+
+The Layout category includes all twelve reference patterns: Single Column, Two Column, Grid Layout, F-Pattern, Z-Pattern, Split Screen, Magazine, Asymmetrical, Holy Grail, Masonry, Hero Landing, and Full-Screen. Search their names or use-case tags, open details, and copy the implementation prompt.
+
+`layout-*` registry keys use `LayoutPreview`; `PromptPreview` passes the key suffix as its required layout input. Shared static browser chrome and per-pattern CSS keep wireframes consistent in cards and dialogs. F/Z overlays illustrate scanning paths; masonry uses varied card heights while grid uses aligned rows. These are compact structural diagrams, not full website demos; each copied prompt specifies responsive behavior for the resulting implementation. No external assets or new dependencies are needed.
