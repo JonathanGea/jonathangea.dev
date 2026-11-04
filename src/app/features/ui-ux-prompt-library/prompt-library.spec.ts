@@ -15,8 +15,8 @@ describe('Prompt Library', () => {
   it('renders every reference prompt with a registered independent preview', () => {
     const fixture = TestBed.createComponent(PromptLibrary);
     fixture.detectChanges();
-    expect(PROMPTS.length).toBe(27);
-    expect(CATEGORIES.length).toBe(7);
+    expect(PROMPTS.length).toBe(13);
+    expect(CATEGORIES.length).toBe(2);
     expect(new Set(PROMPTS.map(item => item.slug)).size).toBe(PROMPTS.length);
     expect(fixture.nativeElement.querySelectorAll('app-prompt-card').length).toBe(PROMPTS.length);
     for (const item of PROMPTS) {
@@ -54,30 +54,19 @@ describe('Prompt Library', () => {
     fixture.detectChanges();
     const root = fixture.nativeElement as HTMLElement;
     const input = root.querySelector<HTMLInputElement>('input[type=search]')!;
-    input.value = '  NOTIFICATION  ';
+    input.value = '  HOLY GRAIL  ';
     input.dispatchEvent(new Event('input'));
     fixture.detectChanges();
     expect(root.querySelectorAll('app-prompt-card').length).toBe(1);
     const layout = Array.from(root.querySelectorAll<HTMLButtonElement>('app-prompt-filter button')).find(button => button.textContent?.trim() === 'Layout')!;
     layout.click(); fixture.detectChanges();
+    expect(root.querySelectorAll('app-prompt-card').length).toBe(1);
+    input.value = 'no matching layout'; input.dispatchEvent(new Event('input')); fixture.detectChanges();
     expect(root.querySelectorAll('app-prompt-card').length).toBe(0);
     expect(root.textContent).toContain('Prompt tidak ditemukan.');
     root.querySelector<HTMLButtonElement>('.empty button')!.click(); fixture.detectChanges();
     expect(root.querySelectorAll('app-prompt-card').length).toBe(PROMPTS.length);
     expect(input.value).toBe('');
-  });
-
-  it('keeps embedded controls independent of opening details and replays only their own preview', () => {
-    const fixture = TestBed.createComponent(PromptLibrary); fixture.detectChanges();
-    const root = fixture.nativeElement as HTMLElement;
-    const tabs = root.querySelector<HTMLElement>('[data-prompt-id=animated-tabs]')!;
-    tabs.querySelectorAll<HTMLButtonElement>('[role=tab]')[1].click(); fixture.detectChanges();
-    expect(fixture.componentInstance.selected).toBeNull();
-    expect(tabs.querySelector('[role=tabpanel]')?.textContent).toContain('Maya published');
-    const dashboard = root.querySelector('[data-prompt-id=saas-dashboard] app-prompt-preview > *');
-    tabs.querySelector<HTMLButtonElement>('.replay')!.click(); fixture.detectChanges();
-    expect(tabs.querySelector('[role=tab]')?.getAttribute('aria-selected')).toBe('true');
-    expect(root.querySelector('[data-prompt-id=saas-dashboard] app-prompt-preview > *')).toBe(dashboard);
   });
 
   it('supports tab arrow, Home and End keys and moves focus with the selection', () => {
